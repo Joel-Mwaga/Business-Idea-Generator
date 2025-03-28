@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Idea Generator</title>
-    <link rel="stylesheet" href="./style.css">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #ideas-container { margin-top: 20px; }
+        .idea-card {
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin: 10px auto; 
+            width: 300px; 
+            background: #f9f9f9; 
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-
     <h1>Business Idea Generator</h1>
-    <input type="text" id="search" placeholder="Enter business idea...">
-    <button onclick="fetchIdeas()">Generate</button>
+    <button id="fetch-btn">Get Business Ideas</button>
+    <div id="ideas-container"></div>
 
-    <ul id="results"></ul>
-    <script type="module" src="./index.js"></script>
-
+    <script src="script.js"></script> <!-- Linking the JavaScript file -->
 </body>
 </html>
