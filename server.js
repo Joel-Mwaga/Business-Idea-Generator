@@ -1,83 +1,83 @@
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { Pool } = require("pg");
-
-env.config();
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 5000;
-const secretKey = process.env.JWT_SECRET || "supersecretkey";
-
-// Middleware
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
-// PostgreSQL Database Connection
-const pool = new Pool({
-  user: "your_db_user",
-  host: "localhost",
-  database: "business_ideas",
-  password: "your_db_password",
-  port: 5432,
+const businessIdeas = {
+    "30,000-50,000": {
+        "software-developer": ["Freelance Web Development", "App Development for Small Businesses"],
+        "teacher": ["Online Tutoring Service", "Educational YouTube Channel"],
+        "doctor": ["Health Blog", "Telemedicine Consultation"],
+        "nurse": ["Home Health Care Service", "Online Nursing Advice"],
+        "engineer": ["Technical Consulting", "Product Design and Prototyping"],
+        "accountant": ["Small Business Accounting Services", "Financial Coaching"],
+        "lawyer": ["Legal Consulting for Startups", "Online Legal Advice"],
+        "graphic-designer": ["Freelance Logo Design", "Print-on-Demand Store"],
+        "data-analyst": ["Data Visualization Services", "Freelance Data Analysis"],
+        "marketing-specialist": ["Social Media Management", "Content Marketing Service"]
+    },
+    "50,000-70,000": {
+        "software-developer": ["Custom Software Development", "SaaS Startup"],
+        "teacher": ["Private Coaching Center", "Educational Mobile App"],
+        "doctor": ["Wellness Clinic", "Health Coaching"],
+        "nurse": ["Mobile Nursing Services", "Health Blogging"],
+        "engineer": ["Renewable Energy Consulting", "Automation Services"],
+        "accountant": ["Bookkeeping Business", "Tax Preparation Service"],
+        "lawyer": ["Corporate Legal Advisory", "Legal Document Review"],
+        "graphic-designer": ["Branding Agency", "Custom Illustration Services"],
+        "data-analyst": ["AI & Machine Learning Consultancy", "Business Intelligence Services"],
+        "marketing-specialist": ["SEO Consulting", "Email Marketing Services"]
+    },
+    "70,000-100,000": {
+        "software-developer": ["Tech Startup", "AI-based Applications"],
+        "teacher": ["EdTech Startup", "Online Course Platform"],
+        "doctor": ["Private Clinic", "Medical Research Firm"],
+        "nurse": ["Specialized Nursing Facility", "Wellness Retreat"],
+        "engineer": ["Engineering Consultancy Firm", "Smart Home Automation Business"],
+        "accountant": ["Financial Advisory Firm", "Investment Consultancy"],
+        "lawyer": ["High-profile Legal Consultancy", "Litigation Firm"],
+        "graphic-designer": ["UX/UI Design Firm", "Game Design Studio"],
+        "data-analyst": ["Big Data Consulting", "Predictive Analytics Service"],
+        "marketing-specialist": ["Advertising Agency", "Influencer Marketing Agency"]
+    },
+    "100,000-150,000": {
+        "software-developer": ["AI-driven Software Company", "Tech Innovation Hub"],
+        "teacher": ["International School", "E-learning Platform"],
+        "doctor": ["Specialized Medical Center", "Medical Equipment Supply"],
+        "nurse": ["Luxury Healthcare Services", "Home Nursing Agency"],
+        "engineer": ["High-tech Engineering Firm", "AI-driven Robotics Startup"],
+        "accountant": ["Corporate Finance Firm", "Wealth Management Agency"],
+        "lawyer": ["International Law Firm", "Corporate M&A Advisory"],
+        "graphic-designer": ["Luxury Branding Agency", "Animation Studio"],
+        "data-analyst": ["AI-based Predictive Analysis", "Cybersecurity Analytics Firm"],
+        "marketing-specialist": ["Global Digital Marketing Firm", "Luxury Brand Consulting"]
+    },
+    "150,000+": {
+        "software-developer": ["Tech Conglomerate", "AI Research Lab"],
+        "teacher": ["International Education Network", "EdTech Franchise"],
+        "doctor": ["Hospital Chain", "Biotech Startup"],
+        "nurse": ["Healthcare Chain", "Retirement Home Franchise"],
+        "engineer": ["Space Tech Company", "Energy Solutions Corporation"],
+        "accountant": ["Global Accounting Firm", "Hedge Fund Advisory"],
+        "lawyer": ["Global Legal Firm", "Government Policy Advisory"],
+        "graphic-designer": ["Multinational Branding Firm", "Movie Production Studio"],
+        "data-analyst": ["AI Research Center", "Quantum Computing Analytics"],
+        "marketing-specialist": ["International PR Firm", "Fortune 500 Consulting"]
+    }
+};
+
+app.post('/api/generate-ideas', (req, res) => {
+    const { salaryRange, occupation } = req.body;
+    if (businessIdeas[salaryRange] && businessIdeas[salaryRange][occupation]) {
+        res.json({ ideas: businessIdeas[salaryRange][occupation] });
+    } else {
+        res.json({ ideas: ["No business ideas found for the selected criteria."] });
+    }
 });
 
-// User Signup
-app.post("/signup", async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id",
-      [name, email, hashedPassword]
-    );
-    res.status(201).json({ message: "User created successfully", userId: result.rows[0].id });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// User Login
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    if (result.rows.length === 0) return res.status(401).json({ message: "Invalid credentials" });
-    
-    const user = result.rows[0];
-    const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) return res.status(401).json({ message: "Invalid credentials" });
-    
-    const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: "1h" });
-    res.json({ token });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Generate Business Idea
-app.post("/generate-idea", async (req, res) => {
-  const { salary, lifestyle } = req.body;
-  try {
-    const generatedIdea = `Start a side hustle in ${lifestyle} with an initial investment of ${salary * 0.1}`;
-    res.json({ idea: generatedIdea });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Save Business Idea
-app.post("/save-idea", async (req, res) => {
-  const { userId, idea } = req.body;
-  try {
-    await pool.query("INSERT INTO business_ideas (user_id, idea) VALUES ($1, $2)", [userId, idea]);
-    res.status(201).json({ message: "Idea saved successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
