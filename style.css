@@ -7,18 +7,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh; /* Changed from height to min-height */
+    min-height: 100vh;
 }
 
-/* Ensure the content can scroll */
 html, body {
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-/* Navigation Bar */
 nav {
-    background: linear-gradient(90deg, #004d00, #006600); /* Green gradient */
+    background: linear-gradient(90deg, #004d00, #031a38);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px 40px;
@@ -37,147 +35,149 @@ nav ul li {
     display: inline;
 }
 
-/* Navigation Links */
 nav ul li a {
-    color: #00ff00; /* Bright green text */
+    color: #00ff00;
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover Effect for Navigation Links */
 nav ul li a:hover {
-    background-color: #003300; /* Darker green background on hover */
-    color: white; /* White text on hover */
+    background-color: #003300;
+    color: white;
     border-radius: 5px;
 }
 
-button {
-    background: linear-gradient(90deg, #6a11cb, #2575fc);
-    color: white;
-    font-size: 1rem;
+button, .idea-button {
+    background: linear-gradient(90deg, #004d00, #170646);
+    color: #00ff00;
+    font-size: 1.2rem;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
+    margin: 10px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
 }
 
-button:hover {
+button:hover, .idea-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #003300, #004d00);
 }
+
 h1 {
     font-size: 3rem;
     color: green;
     text-align: center;
     margin: 0;
 }
+
+label {
+    font-size: 2rem;
+    color: #00ff00;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 #salary-range, #occupation {
     font-size: 2rem;
-    color: #00ff00; /* Bright green text */
+    color: #00ff00;
     text-align: center;
     margin: 10px 0;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
-    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #003300, #004d00);
     padding: 10px 20px;
-    border: 2px solid #00ff00; /* Green border for emphasis */
+    border: 2px solid #00ff00;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for a modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover effect for dropdowns */
 #salary-range:hover, #occupation:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); /* Slightly stronger shadow on hover */
-    background: linear-gradient(90deg, #004d00, #006600); /* Brighter green gradient on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(90deg, #004d00, #006600);
 }
 
-/* Optional: Add spacing between dropdowns */
-#salary-range + #occupation {
-    margin-top: 20px;
-}
-
-/* About Card Styling */
 .about-card {
-    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
-    color: #00ff00; /* Bright green text */
+    background: linear-gradient(90deg, #003300, #004d00);
+    color: #00ff00;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
     text-align: center;
     max-width: 600px;
-    margin: 20px auto; /* Center horizontally */
+    margin: 20px auto;
     font-family: Arial, sans-serif;
 }
 
-/* About Card Title */
 .about-card h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for depth */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* About Card Paragraph */
 .about-card p {
     font-size: 1.2rem;
     line-height: 1.6;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Business Idea Cards */
 .idea-container {
     display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
-    justify-content: center; /* Center the cards */
-    gap: 20px; /* Add spacing between cards */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     margin-top: 20px;
 }
 
 .idea-card {
-    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
-    color: #00ff00; /* Bright green text */
+    background: linear-gradient(90deg, #003300, #004d00);
+    color: #00ff00;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     max-width: 300px;
-    flex: 1 1 calc(33.333% - 40px); /* Responsive: 3 cards per row */
+    flex: 1 1 calc(33.333% - 40px);
     box-sizing: border-box;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover effect for idea cards */
 .idea-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7);
 }
 
-/* Title for idea cards */
 .idea-card h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Description for idea cards */
 .idea-card p {
     font-size: 1rem;
     line-height: 1.5;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Style for labels */
-label {
-    font-size: 2rem; /* Increase font size */
-    color: #00ff00; /* Bright green text to match the theme */
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: block; /* Ensure the label is on its own line */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
+.research-container {
+    background: linear-gradient(90deg, #003300, #004d00);
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin: 20px auto;
+    display: none;
+    font-family: Arial, sans-serif;
+    text-align: left;
 }
