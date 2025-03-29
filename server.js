@@ -71,10 +71,22 @@ const businessIdeas = {
 app.post('/api/generate-ideas', (req, res) => {
     const { salaryRange, occupation } = req.body;
     if (businessIdeas[salaryRange] && businessIdeas[salaryRange][occupation]) {
-        res.json({ ideas: businessIdeas[salaryRange][occupation] });
+        const ideas = businessIdeas[salaryRange][occupation].map(idea => ({ idea, detailsAvailable: true }));
+        res.json({ ideas });
     } else {
-        res.json({ ideas: ["No business ideas found for the selected criteria."] });
+        res.json({ ideas: [{ idea: "No business ideas found for the selected criteria.", detailsAvailable: false }] });
     }
+});
+
+app.post('/api/get-business-details', (req, res) => {
+    const { businessIdea } = req.body;
+    const details = {
+        "Freelance Web Development": "Market demand for web development is high. Ideal for individuals with coding skills. Potential earnings range from $50,000-$100,000 per year.",
+        "App Development for Small Businesses": "Growing demand for mobile apps in small enterprises. Startup costs are moderate, and scalability is high.",
+        "Online Tutoring Service": "High demand due to online education trends. Requires minimal investment and can scale globally.",
+        "Educational YouTube Channel": "Passive income opportunity through ad revenue. Content quality is key for audience growth."
+    };
+    res.json({ details: details[businessIdea] || "No detailed information available." });
 });
 
 const PORT = process.env.PORT || 5000;

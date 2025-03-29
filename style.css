@@ -1,123 +1,183 @@
-/* General Reset */
-* {
+body {
+    background-color: black;
+    color: green;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    line-height: 1.6;
-    padding: 20px;
-}
-
-/* Header Styling */
-header {
-    background: #4CAF50;
-    color: white;
-    padding: 20px 10px;
-    text-align: center;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2rem;
-}
-
-/* Main Content Styling */
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Form Styling */
-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-form input, form textarea, form button {
-    font-size: 1rem;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form input:focus, form textarea:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
-
-form button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-form button:hover {
-    background: #45a049;
-}
-
-/* Idea List Styling */
-.idea-list {
-    margin-top: 20px;
-}
-
-.idea-item {
-    background: #e8f5e9;
-    padding: 15px;
-    border: 1px solid #c8e6c9;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    min-height: 100vh; /* Changed from height to min-height */
 }
 
-.idea-item h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+/* Ensure the content can scroll */
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.idea-item p {
-    font-size: 1rem;
-    color: #555;
+/* Navigation Bar */
+nav {
+    background: linear-gradient(90deg, #004d00, #006600); /* Green gradient */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px;
 }
 
-.idea-item button {
-    background: #f44336;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+/* Navigation Links */
+nav ul li a {
+    color: #00ff00; /* Bright green text */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover Effect for Navigation Links */
+nav ul li a:hover {
+    background-color: #003300; /* Darker green background on hover */
+    color: white; /* White text on hover */
+    border-radius: 5px;
+}
+
+button {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
     color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
     border: none;
-    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.idea-item button:hover {
-    background: #d32f2f;
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* Footer Styling */
-footer {
+h1 {
+    font-size: 3rem;
+    color: green;
     text-align: center;
+    margin: 0;
+}
+#salary-range, #occupation {
+    font-size: 2rem;
+    color: #00ff00; /* Bright green text */
+    text-align: center;
+    margin: 10px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
+    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
+    padding: 10px 20px;
+    border: 2px solid #00ff00; /* Green border for emphasis */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for a modern look */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for dropdowns */
+#salary-range:hover, #occupation:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); /* Slightly stronger shadow on hover */
+    background: linear-gradient(90deg, #004d00, #006600); /* Brighter green gradient on hover */
+}
+
+/* Optional: Add spacing between dropdowns */
+#salary-range + #occupation {
     margin-top: 20px;
-    font-size: 0.9rem;
-    color: #777;
+}
+
+/* About Card Styling */
+.about-card {
+    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
+    color: #00ff00; /* Bright green text */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    text-align: center;
+    max-width: 600px;
+    margin: 20px auto; /* Center horizontally */
+    font-family: Arial, sans-serif;
+}
+
+/* About Card Title */
+.about-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for depth */
+}
+
+/* About Card Paragraph */
+.about-card p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+/* Business Idea Cards */
+.idea-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Add spacing between cards */
+    margin-top: 20px;
+}
+
+.idea-card {
+    background: linear-gradient(90deg, #003300, #004d00); /* Dark green gradient */
+    color: #00ff00; /* Bright green text */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    text-align: center;
+    max-width: 300px;
+    flex: 1 1 calc(33.333% - 40px); /* Responsive: 3 cards per row */
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for idea cards */
+.idea-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+}
+
+/* Title for idea cards */
+.idea-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+/* Description for idea cards */
+.idea-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+}
+
+/* Style for labels */
+label {
+    font-size: 2rem; /* Increase font size */
+    color: #00ff00; /* Bright green text to match the theme */
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block; /* Ensure the label is on its own line */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
 }
